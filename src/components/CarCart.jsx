@@ -30,19 +30,22 @@ const CarCart = ({ car }) => {
     seats,
 
     transmission,
+    _id,
   } = car;
 
   return (
     <div className="relative  rounded-2xl overflow-hidden bg-white shadow-md  hover:shadow-xl transition-all duration-300">
       {/* Image Section */}
-      <div className="relative w-full h-48">
-        <Image
-          src={image_url}
-          alt={car_name}
-          fill
-          className="w-full h-full object-cover hover:scale-110 duration-800"
-        />
-      </div>
+      <Link href={`/allcars/${_id}`}>
+        <div className="relative w-full h-48">
+          <Image
+            src={image_url || car.imageUrl || "/placeholder-car.jpg"}
+            alt={car_name || "Car"}
+            fill
+            className="w-full h-full object-cover hover:scale-110 duration-800"
+          />
+        </div>
+      </Link>
       <div className="absolute text-[14px] font-bold top-3 py-1 rounded-xl px-3 left-3 z-30 text-red-50 bg-[#ff3600]">
         <h1>{car_type} </h1>
       </div>
@@ -81,7 +84,7 @@ const CarCart = ({ car }) => {
 
         {/* Rent Now Button */}
         <Link
-          href={`/allcars/${car._id}           `}
+          href={`/allcars/${_id}`}
           className="flex items-center justify-center gap-2 w-full py-3.5 bg-[#ff3600] hover:scale-105 text-white text-base font-semibold rounded-xl transition-all duration-300"
         >
           <CircleInfoFill />

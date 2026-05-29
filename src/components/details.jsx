@@ -1,8 +1,10 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { BookingModal } from "./BookingModal";
 
 const Details = ({ car }) => {
+  console.log(car);
   const {
     car_name,
     daily_rent_price,
@@ -79,11 +81,10 @@ const Details = ({ car }) => {
           </p>
 
           <div className="flex gap-3 mt-1 flex-wrap">
-            <button className="px-6 md:px-8 py-2.5 md:py-3 bg-black text-white text-sm font-bold uppercase tracking-widest hover:bg-gray-800 transition-all duration-300">
-              Book Now
-            </button>
+            <BookingModal car={car} />
+
             <Link
-              href="/cars"
+              href="/allcars"
               className="px-6 md:px-8 py-2.5 md:py-3 border-2 border-black text-black text-sm font-bold uppercase tracking-widest hover:bg-black hover:text-white transition-all duration-300"
             >
               Back to Cars
@@ -99,7 +100,7 @@ const Details = ({ car }) => {
             alt={car_name}
             width={600}
             height={400}
-            className="relative z-10 w-full  mx-auto object-contain drop-shadow-2xl shadow-2xl shadow-sky-500 rounded-2xl lg:rounded-tl-[60px] lg:rounded-br-[60px] hover:scale-105 transition-transform duration-500"
+            className="relative z-10 w-full max-h-[270px] sm:max-h-[350px] md:max-h-[400px] object-cover  mx-auto object-contain drop-shadow-2xl shadow-2xl shadow-sky-500 rounded-2xl lg:rounded-tl-[60px] lg:rounded-br-[60px] hover:scale-105 transition-transform duration-500"
           />
         </div>
       </div>

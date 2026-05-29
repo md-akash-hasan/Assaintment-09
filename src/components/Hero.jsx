@@ -1,6 +1,7 @@
 // components/home/HeroPage.jsx
 import React from "react";
 import { Alldata } from "./Alldata";
+import Link from "next/link";
 
 const HeroPage = async () => {
   let data = await Alldata();
@@ -36,9 +37,11 @@ const HeroPage = async () => {
         </p>
 
         <div className="flex flex-wrap gap-3 justify-center">
-          <button className="bg-[#ff5c35] hover:bg-[#e44d28] text-white font-medium px-7 py-3 rounded-md transition-colors">
-            Book a car
-          </button>
+          <Link href={`/allcars`}>
+            <button className="bg-[#ff5c35] hover:bg-[#e44d28] text-white font-medium px-7 py-3 rounded-md transition-colors">
+              Book a car
+            </button>
+          </Link>
           <button className="bg-white hover:bg-white/90 text-[#ff5c35] font-medium px-7 py-3 rounded-md border-2 border-white transition-colors">
             Browse fleet
           </button>

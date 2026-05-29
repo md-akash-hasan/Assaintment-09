@@ -11,8 +11,8 @@ const Button = () => {
       <button>
         {" "}
         <Link
-          href={`/explore`}
-          className={`${path === "/explore" ? "primaryColor" : "primaryColor"}`}
+          href={`/allcars`}
+          className={`${path === "/allcars" ? "primaryColor" : "primaryColor"}`}
         >
           All Cars
         </Link>

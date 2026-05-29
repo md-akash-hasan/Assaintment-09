@@ -7,8 +7,8 @@ const FeaturePage = async () => {
   let datas = await Feature();
 
   return (
-    <div className="px-6">
-      <div className=" flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between  my-5">
+    <div className="px-6 mb-6">
+      <div className="flex flex-col sm:flex-row gap-4 sm:items-center sm:justify-between my-5   p-6 rounded-xl w-full">
         <div className="">
           <h1 className="text-[26px] sm:text-[28px] font-bold">
             <span className="primaryColor">Feature:</span> Most Popular Cars
@@ -17,10 +17,11 @@ const FeaturePage = async () => {
             <HandPointRight /> 100% Trusted car rental platform in the World
           </p>
         </div>
-        <div className="min-w-50 ">
+        <div className="min-w-50   flex justify-end">
           <AllCarrs />
         </div>
       </div>
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-12">
         {datas.map((car) => (
           <CarCart key={car._id} car={car} />

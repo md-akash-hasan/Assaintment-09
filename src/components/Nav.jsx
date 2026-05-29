@@ -17,7 +17,6 @@ export function Nav() {
   const { data } = authClient.useSession();
 
   let user = data?.user;
-  console.log(user);
 
   let path = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -92,7 +91,11 @@ export function Nav() {
             <div className="flex items-center gap-3 text-[16px] font-bold">
               <div>
                 <Avatar>
-                  <Avatar.Image alt={user.name} src={user.image} />
+                  <Avatar.Image
+                    referrerPolicy="no-referrer"
+                    alt={user.name}
+                    src={user.image}
+                  />
                   <Avatar.Fallback>JD</Avatar.Fallback>
                 </Avatar>
               </div>

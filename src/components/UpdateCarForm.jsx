@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 
-const AddCar = () => {
+const UpdateCarForm = () => {
   const { data } = authClient.useSession();
   let user = data?.user;
 

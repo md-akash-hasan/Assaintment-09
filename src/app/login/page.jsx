@@ -19,6 +19,11 @@ import { FcGoogle } from "react-icons/fc";
 import { toast } from "react-toastify";
 
 export default function loginPage() {
+  let hendelGoogle = async () => {
+    await authClient.signIn.social({
+      provider: "google",
+    });
+  };
   const onSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -39,8 +44,7 @@ export default function loginPage() {
   };
 
   return (
-    <div className="relative flex flex-col items-center h-screen py-8">
-      {/* শুধু background image — opacity কমানো */}
+    <div className="relative flex flex-col items-center h-screen py-8 ">
       <div
         className="absolute inset-0 "
         style={{
@@ -62,7 +66,7 @@ export default function loginPage() {
             </h1>
             <p className="font-bold text-center mt-1">Please Login here</p>
           </div>
-          <Form className="flex w-96 flex-col gap-4" onSubmit={onSubmit}>
+          <Form className="flex w-96 flex-col gap-4 px-3" onSubmit={onSubmit}>
             <TextField
               isRequired
               name="email"
@@ -111,14 +115,17 @@ export default function loginPage() {
             </div>
           </Form>
 
-          <div>
-            <div className="flex items-center gap-3 my-2">
+          <div className="px-3">
+            <div className="flex items-center gap-3 my-2 ">
               <div className="flex-1 h-px bg-gray-300" />
               <span className="text-gray-500 text-sm">or</span>
               <div className="flex-1 h-px bg-gray-300" />
             </div>
             <div className="w-full">
-              <Button className="w-full bg-black/40 font-bold primaryColor">
+              <Button
+                className="w-full bg-black/40 font-bold primaryColor"
+                onClick={hendelGoogle}
+              >
                 <FcGoogle />
                 Google
               </Button>
