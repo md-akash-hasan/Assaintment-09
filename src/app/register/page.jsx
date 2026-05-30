@@ -146,7 +146,7 @@ export default function RegisterPage() {
             </div>
             <p className="mt-2 text-sm">
               Already have an account?{" "}
-              <Link href="/login" className="text-[#0000EE] font-black">
+              <Link href="/login" className="text-white font-bold">
                 Log in
               </Link>
             </p>

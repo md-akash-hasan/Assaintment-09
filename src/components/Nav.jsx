@@ -12,9 +12,12 @@ import { authClient } from "@/lib/auth-client";
 import LogoutButton from "./uiverse/LogoutButton";
 import { Avatar } from "@heroui/react";
 import { UserInformation } from "./UserInformation";
+import { ThemeSwitch } from "./ThemingSwitch";
+import { useTheme } from "next-themes";
 
 export function Nav() {
   const { data } = authClient.useSession();
+  const { resolvedTheme, setTheme } = useTheme();
 
   let user = data?.user;
 
@@ -22,18 +25,127 @@ export function Nav() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   let Li = (
     <>
-      <li className={`${path === "/" ? "primaryColor" : ""}`}>
-        <Link href="/">Home</Link>
-      </li>
-      <li className={`${path === "/allcars" ? "primaryColor" : ""}`}>
-        <Link href="/allcars">Explore Cars</Link>
-      </li>
-      <li className={`${path === "/addcar" ? "primaryColor" : ""}`}>
-        <Link href="/addcar">Add Car</Link>
-      </li>
-      <li className={`${path === "/booking" ? "primaryColor" : ""}`}>
-        <Link href="/booking"> My Booking </Link>
-      </li>
+      {user ? (
+        <>
+          <li className={`${path === "/" ? "primaryColor" : ""}`}>
+            <Link href="/">Home</Link>
+          </li>
+          <li className={`${path === "/allcars" ? "primaryColor" : ""}`}>
+            <Link href="/allcars">Explore Cars</Link>
+          </li>
+          <li className={`${path === "/addcar" ? "primaryColor" : ""}`}>
+            <Link href="/addcar">Add Car</Link>
+          </li>
+          <li className={`${path === "/booking" ? "primaryColor" : ""}`}>
+            <Link href="/booking"> My Booking </Link>
+          </li>
+          <li>
+            <div className="sm:hidden">
+              <button
+                onClick={() =>
+                  setTheme(resolvedTheme === "dark" ? "light" : "dark")
+                }
+                className=" mt- flex items-center gap-1 px-4 py-1 rounded-xl border border-divider bg-default-100 hover:bg-default-200 transition text-sm font-medium text-foreground"
+              >
+                {resolvedTheme === "dark" ? (
+                  <>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="w-4 h-4"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707M17.657 17.657l-.707-.707M6.343 6.343l-.707-.707M12 7a5 5 0 100 10A5 5 0 0012 7z"
+                      />
+                    </svg>
+                    Light Mode
+                  </>
+                ) : (
+                  <>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="w-4 h-4"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"
+                      />
+                    </svg>
+                    Dark Mode
+                  </>
+                )}
+              </button>
+            </div>
+          </li>
+        </>
+      ) : (
+        <>
+          <li className={`${path === "/" ? "primaryColor" : ""}`}>
+            <Link href="/">Home</Link>
+          </li>
+          <li className={`${path === "/allcars" ? "primaryColor" : ""}`}>
+            <Link href="/allcars">Explore Cars</Link>
+          </li>
+          <li>
+            <div className="sm:hidden">
+              <button
+                onClick={() =>
+                  setTheme(resolvedTheme === "dark" ? "light" : "dark")
+                }
+                className=" mt- flex items-center gap-1 px-4 py-1 rounded-xl border border-divider bg-default-100 hover:bg-default-200 transition text-sm font-medium text-foreground"
+              >
+                {resolvedTheme === "dark" ? (
+                  <>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="w-4 h-4"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707M17.657 17.657l-.707-.707M6.343 6.343l-.707-.707M12 7a5 5 0 100 10A5 5 0 0012 7z"
+                      />
+                    </svg>
+                    Light Mode
+                  </>
+                ) : (
+                  <>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="w-4 h-4"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"
+                      />
+                    </svg>
+                    Dark Mode
+                  </>
+                )}
+              </button>
+            </div>
+          </li>
+        </>
+      )}
     </>
   );
 
@@ -86,9 +198,54 @@ export function Nav() {
         <ul className="hidden items-center gap-4 md:flex text-[16px] font-bold">
           {Li}
         </ul>
+
         <div className="flex gap-10">
           {user ? (
             <div className="flex items-center gap-3 text-[16px] font-bold">
+              <div className="hidden sm:block">
+                <button
+                  onClick={() =>
+                    setTheme(resolvedTheme === "dark" ? "light" : "dark")
+                  }
+                  className=" px-4 py-2 rounded-full border border-divider bg-default-100 hover:bg-default-200 transition text-sm font-medium text-foreground"
+                >
+                  {resolvedTheme === "dark" ? (
+                    <>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="w-4 h-4"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707M17.657 17.657l-.707-.707M6.343 6.343l-.707-.707M12 7a5 5 0 100 10A5 5 0 0012 7z"
+                        />
+                      </svg>
+                    </>
+                  ) : (
+                    <>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="w-4 h-4"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"
+                        />
+                      </svg>
+                    </>
+                  )}
+                </button>
+              </div>
               <div>
                 <Avatar>
                   <Avatar.Image
@@ -102,7 +259,51 @@ export function Nav() {
               <UserInformation />
             </div>
           ) : (
-            <div className="flex gap-3 text-[16px] font-bold">
+            <div className="flex items-center gap-3 text-[16px] font-bold">
+              <div className=" hidden sm:block">
+                <button
+                  onClick={() =>
+                    setTheme(resolvedTheme === "dark" ? "light" : "dark")
+                  }
+                  className=" px-4 py-1 rounded-full border border-divider bg-default-100 hover:bg-default-200 transition text-sm font-medium text-foreground"
+                >
+                  {resolvedTheme === "dark" ? (
+                    <>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="w-4 h-4"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707M17.657 17.657l-.707-.707M6.343 6.343l-.707-.707M12 7a5 5 0 100 10A5 5 0 0012 7z"
+                        />
+                      </svg>
+                    </>
+                  ) : (
+                    <>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="w-4 h-4"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"
+                        />
+                      </svg>
+                    </>
+                  )}
+                </button>
+              </div>
               <LoginButtom />
               <RegisterButton />
             </div>

@@ -38,10 +38,15 @@ export function BookingModal({ car }) {
     console.log("booking", booking);
     console.log("car", car);
 
+    const { data: tokenData } = await authClient.token();
+
     try {
       const res = await fetch("http://localhost:8000/booking", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          authorization: `Bearer ${tokenData.token}`,
+        },
         body: JSON.stringify(booking),
       });
       const data = await res.json();
@@ -59,7 +64,10 @@ export function BookingModal({ car }) {
     }
     let res = await fetch(`http://localhost:8000/update/${car?._id}`, {
       method: "PATCH",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `Bearer ${tokenData.token}`,
+      },
     });
     let data = await res.json();
   };

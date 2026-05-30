@@ -62,9 +62,9 @@ export default function loginPage() {
         <div className="shadow p-5 rounded-2xl">
           <div>
             <h1 className="font-bold text-3xl text-center text-red-700">
-              Login Page
+              Welcome Back!
             </h1>
-            <p className="font-bold text-center mt-1">Please Login here</p>
+            <p className="font-bold text-center mt-1">Please Login </p>
           </div>
           <Form className="flex w-96 flex-col gap-4 px-3" onSubmit={onSubmit}>
             <TextField
@@ -132,7 +132,7 @@ export default function loginPage() {
             </div>
             <p className="mt-2 text-sm">
               No account?{" "}
-              <Link href="/register" className="text-[#0000EE] font-black">
+              <Link href="/register" className="text-white font-bold">
                 Register Now
               </Link>
             </p>

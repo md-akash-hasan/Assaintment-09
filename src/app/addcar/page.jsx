@@ -1,6 +1,5 @@
 "use client";
 import { authClient } from "@/lib/auth-client";
-
 import { redirect } from "next/navigation";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
@@ -19,11 +18,11 @@ const AddCar = () => {
     description: "",
     availability: "available",
   });
-  console.log();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+
   let addcar = {
     car_name: formData.carName,
     daily_rent_price: formData.dailyRent,
@@ -38,18 +37,19 @@ const AddCar = () => {
     userEmail: user?.email,
     userImageUrl: user?.image,
   };
-  console.log(addcar);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    let { data: tokenData } = await authClient.token();
     let res = await fetch("http://localhost:8000/addcar", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `Bearer ${tokenData.token}`,
+      },
       body: JSON.stringify(addcar),
     });
     let data = await res.json();
-    console.log(data);
     if (data.acknowledged) {
       toast.success("Car Add Successful");
       e.target.reset();
@@ -58,12 +58,15 @@ const AddCar = () => {
   };
 
   const inputClass =
-    "w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-teal-400";
+    "w-full border border-divider rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 transition bg-default-100 text-foreground placeholder:text-default-400";
+
+  const labelClass = "block text-sm font-medium text-default-600 mb-1";
 
   return (
     <div className="relative min-h-screen">
+      {/* Background Image */}
       <div
-        className="absolute inset-0 "
+        className="absolute inset-0"
         style={{
           backgroundImage:
             "url('https://i.ibb.co.com/x8qNZxkw/li900506-car-4148313.jpg')",
@@ -73,19 +76,19 @@ const AddCar = () => {
         }}
       />
 
-      <div className="absolute inset-0 bg-black/15" />
+      {/* Overlay — dark mode-এ আরো গাঢ় */}
+      <div className="absolute inset-0 bg-black/20 dark:bg-black/50" />
 
+      {/* Form */}
       <div className="relative z-10 w-full max-w-xl mx-auto py-6 px-4 sm:px-6 md:px-0">
-        <div className="bg-white/80 p-5 sm:p-8 rounded-2xl shadow ">
-          <h1 className="text-xl font-bold primaryColor mb-6">Add New Car</h1>
+        <div className="bg-background/85 dark:bg-default-100/80 backdrop-blur-sm p-5 sm:p-8 rounded-2xl shadow border border-divider">
+          <h1 className="text-xl font-bold text-primary mb-6">Add New Car</h1>
 
           <form onSubmit={handleSubmit} className="space-y-4">
             {/* Car Name + Daily Rent */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="text-sm font-medium text-gray-600">
-                  Car Name
-                </label>
+                <label className={labelClass}>Car Name</label>
                 <input
                   type="text"
                   name="carName"
@@ -96,9 +99,7 @@ const AddCar = () => {
                 />
               </div>
               <div>
-                <label className="text-sm font-medium text-gray-600">
-                  Daily Rent ($)
-                </label>
+                <label className={labelClass}>Daily Rent ($)</label>
                 <input
                   defaultValue={50}
                   type="number"
@@ -114,9 +115,7 @@ const AddCar = () => {
             {/* Car Type + Seat Capacity */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="text-sm font-medium text-gray-600">
-                  Car Type
-                </label>
+                <label className={labelClass}>Car Type</label>
                 <select
                   defaultValue="Luxury"
                   name="carType"
@@ -133,9 +132,7 @@ const AddCar = () => {
                 </select>
               </div>
               <div>
-                <label className="text-sm font-medium text-gray-600">
-                  Seat Capacity
-                </label>
+                <label className={labelClass}>Seat Capacity</label>
                 <input
                   type="number"
                   name="seatCapacity"
@@ -149,9 +146,7 @@ const AddCar = () => {
 
             {/* Image URL */}
             <div>
-              <label className="text-sm font-medium text-gray-600">
-                Image URL
-              </label>
+              <label className={labelClass}>Image URL</label>
               <input
                 type="url"
                 name="imageUrl"
@@ -164,9 +159,7 @@ const AddCar = () => {
 
             {/* Pickup Location */}
             <div>
-              <label className="text-sm font-medium text-gray-600">
-                Pickup Location
-              </label>
+              <label className={labelClass}>Pickup Location</label>
               <input
                 type="text"
                 name="pickupLocation"
@@ -179,9 +172,7 @@ const AddCar = () => {
 
             {/* Description */}
             <div>
-              <label className="text-sm font-medium text-gray-600">
-                Description
-              </label>
+              <label className={labelClass}>Description</label>
               <textarea
                 name="description"
                 onChange={handleChange}
@@ -194,27 +185,40 @@ const AddCar = () => {
 
             {/* Availability */}
             <div>
-              <label className="text-sm font-medium text-gray-600">
-                Availability
-              </label>
+              <label className={labelClass}>Availability</label>
               <select
                 name="availability"
                 onChange={handleChange}
-                className={inputClass}
+                className="w-full border border-divider rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 transition bg-default-100 text-foreground appearance-none cursor-pointer"
               >
-                <option value="available">Available</option>
-                <option value="unavailable">Unavailable</option>
+                <option
+                  disabled
+                  value="available"
+                  className="bg-background text-foreground"
+                >
+                  Select
+                </option>
+                <option
+                  value="available"
+                  className="bg-background text-foreground"
+                >
+                  ✅ Available
+                </option>
+                <option
+                  value="unavailable"
+                  className="bg-background text-foreground"
+                >
+                  ❌ Unavailable
+                </option>
               </select>
             </div>
 
             {/* Submit */}
-
             <button
               type="submit"
-              className="w-full py-2.5 bg-[#dd3203] hover:bg-[#ff3700] text-white font-semibold rounded-lg transition"
+              className="w-full py-2.5 bg-primary hover:bg-primary/90 active:scale-[0.99] text-white font-semibold rounded-lg transition bg-[#ff3600]"
             >
               Add Car
-              <link></link>
             </button>
           </form>
         </div>

@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { Button, Modal, Surface } from "@heroui/react";
 import UpdateButton from "./uiverse/UpdateButton";
 import { toast } from "react-toastify";
+import { authClient } from "@/lib/auth-client";
 
 const inputClass =
   "w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#dd3203]/40 transition bg-gray-50 text-gray-800 placeholder-gray-400";
@@ -31,11 +32,16 @@ export function UpdateModal({ car }) {
       description: formData.description,
       availability_status: formData.availability,
     };
+    const { data: tokenData } = await authClient.token();
+    console.log(tokenData);
 
     try {
       let res = await fetch(`http://localhost:8000/allcar/${car._id}`, {
         method: "PATCH",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          authorization: `Bearer ${tokenData.token}`,
+        },
         body: JSON.stringify(addcar),
       });
       let data = await res.json();
@@ -56,9 +62,9 @@ export function UpdateModal({ car }) {
 
   return (
     <>
-      <Button variant="outline-none" onPress={() => setIsOpen(true)}>
+      <div variant="outline-none" onPress={() => setIsOpen(true)}>
         <UpdateButton />
-      </Button>
+      </div>
 
       <Modal isOpen={isOpen} onOpenChange={setIsOpen}>
         <Modal.Backdrop>

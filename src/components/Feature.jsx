@@ -10,8 +10,8 @@ const FeaturePage = async () => {
     <div className="px-6 mb-6">
       <div className="flex flex-col sm:flex-row gap-4 sm:items-center sm:justify-between my-5   p-6 rounded-xl w-full">
         <div className="">
-          <h1 className="text-[26px] sm:text-[28px] font-bold">
-            <span className="primaryColor">Feature:</span> Most Popular Cars
+          <h1 className="text-[26px] sm:text-[28px] font-bold ">
+            Available <span className="primaryColor"> Cars</span>
           </h1>
           <p className="flex gap-3 items-center text-muted">
             <HandPointRight /> 100% Trusted car rental platform in the World

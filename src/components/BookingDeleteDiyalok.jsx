@@ -1,5 +1,6 @@
 "use client";
 
+import { authClient } from "@/lib/auth-client";
 import { AlertDialog, Button } from "@heroui/react";
 import { redirect } from "next/navigation";
 import { toast } from "react-toastify";
@@ -8,8 +9,10 @@ export function DeleteBookinDiyalok({ car }) {
   let id = car?._id;
 
   let hendelDelate = async () => {
+    let { data: tokenData } = await authClient.token();
     let res = await fetch(`http://localhost:8000/booking/${id}`, {
       method: "DELETE",
+      headers: { authorization: `Bearer ${tokenData.token}` },
     });
     let data = await res.json();
     console.log(data);

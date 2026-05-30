@@ -1,5 +1,6 @@
 import {
   ArrowsOppositeToDots,
+  Bookmark,
   CircleInfo,
   CircleInfoFill,
 } from "@gravity-ui/icons";
@@ -22,7 +23,7 @@ const CarCart = ({ car }) => {
     pickup_location,
     daily_rent_price,
     seat_capacity,
-
+    total_booking,
     mileage,
     fuelType,
     steering,
@@ -56,13 +57,22 @@ const CarCart = ({ car }) => {
         <h2 className="text-xl font-bold text-teal-600 mb-4">{car_name}</h2>
 
         {/* Specs Grid */}
-        <div className="grid grid-cols-3 gap-y-3 gap-x-2 mb-4">
+        <div className="flex justify-between gap-2.5 mb-4">
           <div className="flex items-center  gap-1.5 text-sm text-gray-500">
             <ArrowsOppositeToDots className="text-gray-400 text-base shrink-0" />
             <span>
               {seat_capacity > 9
                 ? " " + seat_capacity
                 : " " + "0" + seat_capacity}
+            </span>
+          </div>
+          <div className="flex items-center  gap-1.5 text-sm text-gray-500">
+            <Bookmark />
+            <h1>Total Bookin: </h1>
+            <span>
+              {total_booking > 9
+                ? " " + total_booking
+                : " " + "0" + total_booking}
             </span>
           </div>
         </div>

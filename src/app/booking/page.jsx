@@ -7,11 +7,17 @@ const bookingCar = async () => {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
-  console.log(session.user);
+  let { token } = await auth.api.getToken({
+    headers: await headers(),
+  });
+
   let user = session.user;
   console.log(user.email);
   let res = await fetch(
     `http://localhost:8000/booking/${session?.user?.email}`,
+    {
+      headers: { authorization: `Bearer ${token}` },
+    },
   );
   let datas = await res.json();
   return (

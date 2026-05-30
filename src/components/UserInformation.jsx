@@ -65,7 +65,7 @@ export function UserInformation() {
 
           <Dropdown.Item id="listing" textValue="Listing">
             <div className="flex items-center justify-between w-full pointer-events-none">
-              <Label>Listing</Label>
+              <Label>My Added Cars</Label>
               <Kbd slot="keyboard" variant="light">
                 <Kbd.Abbr keyValue="command" />
                 <Kbd.Content>S</Kbd.Content>

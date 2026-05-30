@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { MdDelete, MdDeleteSweep } from "react-icons/md";
 import { toast } from "react-toastify";
 import { DeleteBookinDiyalok } from "./BookingDeleteDiyalok";
+import { authClient } from "@/lib/auth-client";
 
 export function Bookingcar({ car }) {
   const { car_image, car_name, daily_rent_price, booking_date, car_location } =
@@ -20,8 +21,10 @@ export function Bookingcar({ car }) {
   });
 
   let hendelDelate = async () => {
+    let { data: tokenData } = await authClient.token();
     let res = await fetch(`http://localhost:8000/booking/${id}`, {
       method: "DELETE",
+      headers: { authorization: `Bearer ${tokenData}` },
     });
     let data = await res.json();
     console.log(data);

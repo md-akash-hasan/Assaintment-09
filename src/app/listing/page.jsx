@@ -14,8 +14,8 @@ const listingPage = async () => {
         {datas && datas.length > 0 ? (
           <div>
             <div className=" my-5">
-              <h1 className="text-[26px] sm:text-[28px] font-bold text-gray-800 tracking-tight">
-                <span className="primaryColor">My</span> Total Cars
+              <h1 className="text-[26px] sm:text-[28px] font-bold text-neutral tracking-tight">
+                <span className="primaryColor">My</span> Add cars
               </h1>
               <p className="flex gap-2 items-center text-sm text-gray-500 mt-1">
                 All My Cars

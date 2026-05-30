@@ -7,7 +7,7 @@ const explorePage = async () => {
   let datas = await Alldata();
 
   return (
-    <div className="px-6">
+    <div className="px-6 mb-6">
       <div className=" flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between  my-5">
         <div className="">
           <h1 className="text-[26px] sm:text-[28px] font-bold">

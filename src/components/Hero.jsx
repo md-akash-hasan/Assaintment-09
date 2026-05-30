@@ -38,11 +38,11 @@ const HeroPage = async () => {
 
         <div className="flex flex-wrap gap-3 justify-center">
           <Link href={`/allcars`}>
-            <button className="bg-[#ff5c35] hover:bg-[#e44d28] text-white font-medium px-7 py-3 rounded-md transition-colors">
-              Book a car
+            <button className="bg-[#ff5c35] hover:bg-[#e44d28] text-white font-medium px-7 py-3 rounded-md transition-colors max-h-[48px]">
+              Explore Cars
             </button>
           </Link>
-          <button className="bg-white hover:bg-white/90 text-[#ff5c35] font-medium px-7 py-3 rounded-md border-2 border-white transition-colors">
+          <button className="bg-white hover:bg-white/90 text-[#ff5c35] font-medium px-7 py-3 rounded-md border-2 border-white transition-colors max-h-[48px]">
             Browse fleet
           </button>
         </div>
