@@ -46,30 +46,18 @@ export function UserInformation() {
           <Dropdown.Item id="add-car" textValue="Add Car">
             <div className="flex items-center justify-between w-full pointer-events-none">
               <Label>Add Car</Label>
-              <Kbd slot="keyboard" variant="light">
-                <Kbd.Abbr keyValue="command" />
-                <Kbd.Content>N</Kbd.Content>
-              </Kbd>
             </div>
           </Dropdown.Item>
 
           <Dropdown.Item id="my-booking" textValue="My Booking">
             <div className="flex items-center justify-between w-full pointer-events-none">
               <Label>My Booking</Label>
-              <Kbd slot="keyboard" variant="light">
-                <Kbd.Abbr keyValue="command" />
-                <Kbd.Content>O</Kbd.Content>
-              </Kbd>
             </div>
           </Dropdown.Item>
 
           <Dropdown.Item id="listing" textValue="Listing">
             <div className="flex items-center justify-between w-full pointer-events-none">
               <Label>My Added Cars</Label>
-              <Kbd slot="keyboard" variant="light">
-                <Kbd.Abbr keyValue="command" />
-                <Kbd.Content>S</Kbd.Content>
-              </Kbd>
             </div>
           </Dropdown.Item>
 

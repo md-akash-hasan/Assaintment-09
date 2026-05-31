@@ -14,7 +14,7 @@ const bookingCar = async () => {
   let user = session.user;
   console.log(user.email);
   let res = await fetch(
-    `http://localhost:8000/booking/${session?.user?.email}`,
+    `${process.env.NEXT_PUBLIC_BAKEND_URL}/booking/${session?.user?.email}`,
     {
       headers: { authorization: `Bearer ${token}` },
     },

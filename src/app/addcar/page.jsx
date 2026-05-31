@@ -41,7 +41,7 @@ const AddCar = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     let { data: tokenData } = await authClient.token();
-    let res = await fetch("http://localhost:8000/addcar", {
+    let res = await fetch(`${process.env.NEXT_PUBLIC_BAKEND_URL}/addcar`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

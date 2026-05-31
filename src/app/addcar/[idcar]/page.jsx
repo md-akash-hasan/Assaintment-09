@@ -11,7 +11,7 @@ const idCarPage = async ({ params }) => {
   console.log(idcar);
 
   const response = await fetch(
-    `http://localhost:8000/allcars/last?email=${idcar}`,
+    `${process.env.NEXT_PUBLIC_BAKEND_URL}/allcars/last?email=${idcar}`,
     {
       headers: { authorization: `Bearer ${token}` },
     },

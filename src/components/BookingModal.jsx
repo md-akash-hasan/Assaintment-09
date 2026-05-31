@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { Button, Modal, Surface } from "@heroui/react";
 import { toast } from "react-toastify";
 import { authClient } from "@/lib/auth-client";
@@ -14,9 +14,17 @@ const labelClass = "block text-sm font-medium text-gray-600 mb-1";
 export function BookingModal({ car }) {
   const { data } = authClient.useSession();
   let user = data?.user;
+  console.log(user);
 
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
+
+  let hendelBookingButton = () => {
+    if (!user) {
+      redirect("/login");
+      return;
+    }
+  };
 
   const handleBooking = async (e) => {
     e.preventDefault();
@@ -41,7 +49,7 @@ export function BookingModal({ car }) {
     const { data: tokenData } = await authClient.token();
 
     try {
-      const res = await fetch("http://localhost:8000/booking", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BAKEND_URL}/booking`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -62,19 +70,23 @@ export function BookingModal({ car }) {
       console.error(error);
       toast.error("Something went wrong!");
     }
-    let res = await fetch(`http://localhost:8000/update/${car?._id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-        authorization: `Bearer ${tokenData.token}`,
+    let res = await fetch(
+      `${process.env.NEXT_PUBLIC_BAKEND_URL}/update/${car?._id}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          authorization: `Bearer ${tokenData.token}`,
+        },
       },
-    });
+    );
     let data = await res.json();
   };
 
   return (
     <>
       <Button
+        onClick={hendelBookingButton}
         onPress={() => setIsOpen(true)}
         className="px-6 md:px-8 py-2.5 md:py-3 bg-black text-white text-sm font-bold uppercase tracking-widest hover:bg-gray-800 transition-all duration-300 rounded-none h-[48px]"
       >

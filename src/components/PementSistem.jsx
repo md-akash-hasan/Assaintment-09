@@ -40,7 +40,7 @@ const PementSistem = () => {
   return (
     <div>
       <h1 className="sm:text-[30px] text-[25px] font-bold uppercase text-center my-6">
-        prement sistem
+        Payment sistem
       </h1>
       <div className="">
         <Marquee

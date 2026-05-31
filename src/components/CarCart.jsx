@@ -4,6 +4,7 @@ import {
   CircleInfo,
   CircleInfoFill,
 } from "@gravity-ui/icons";
+import { Avatar } from "@heroui/react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -32,6 +33,8 @@ const CarCart = ({ car }) => {
 
     transmission,
     _id,
+    userImageUrl,
+    userName,
   } = car;
 
   return (
@@ -49,6 +52,18 @@ const CarCart = ({ car }) => {
       </Link>
       <div className="absolute text-[14px] font-bold top-3 py-1 rounded-xl px-3 left-3 z-30 text-red-50 bg-[#ff3600]">
         <h1>{car_type} </h1>
+      </div>
+      <div className="absolute right-5 top-43">
+        <div>
+          <Avatar>
+            <Avatar.Image
+              referrerPolicy="no-referrer"
+              alt={userName || "Oner"}
+              src={userImageUrl || car.imageUrl || "/placeholder-car.jpg"}
+            />
+            <Avatar.Fallback>JD</Avatar.Fallback>
+          </Avatar>
+        </div>
       </div>
 
       {/* Content Section */}

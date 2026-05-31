@@ -22,10 +22,13 @@ export function Bookingcar({ car }) {
 
   let hendelDelate = async () => {
     let { data: tokenData } = await authClient.token();
-    let res = await fetch(`http://localhost:8000/booking/${id}`, {
-      method: "DELETE",
-      headers: { authorization: `Bearer ${tokenData}` },
-    });
+    let res = await fetch(
+      `${process.env.NEXT_PUBLIC_BAKEND_URL}/booking/${id}`,
+      {
+        method: "DELETE",
+        headers: { authorization: `Bearer ${tokenData}` },
+      },
+    );
     let data = await res.json();
     console.log(data);
     if (data.deletedCount > 0) {
